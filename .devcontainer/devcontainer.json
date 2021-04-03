@@ -14,7 +14,8 @@
   "settings": {
     "terminal.integrated.shell.linux": "/bin/zsh",
     "cSpell.enabled": true,
-    "cSpell.language": "en,en-US,pt,pt_BR"
+    "cSpell.language": "en,en-US,pt,pt_BR",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   // Add the IDs of extensions you want installed when the container is created.

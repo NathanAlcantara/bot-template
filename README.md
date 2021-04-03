@@ -1,14 +1,15 @@
 <img src="https://user-images.githubusercontent.com/24829816/87224966-7c89b180-c39a-11ea-93c9-5be0c46b96da.png" alt="hive-greeter-logo">
 
-***
+---
 
-| ![hive-greeter-step-1](https://user-images.githubusercontent.com/24829816/87225783-641c9580-c3a0-11ea-9440-b7e931357937.png)| ![hive-greeter-step-2](https://user-images.githubusercontent.com/24829816/87225787-67178600-c3a0-11ea-9013-84afad26b5b2.png) | ![hive-greeter-step-3](https://user-images.githubusercontent.com/24829816/87225790-67b01c80-c3a0-11ea-97c6-7c4f6e089fd8.png)|
-| :-: | :-: | :-: |
-| [Add Discord Bot to your Server](#step-1-add-discord-bot-to-your-server) | [Code your Bot](#step-2-code-your-discord-bot) | [Deploying Bot on Heroku](#step-3-deploying-bot-on-heroku) |
+| ![hive-greeter-step-1](https://user-images.githubusercontent.com/24829816/87225783-641c9580-c3a0-11ea-9440-b7e931357937.png) | ![hive-greeter-step-2](https://user-images.githubusercontent.com/24829816/87225787-67178600-c3a0-11ea-9013-84afad26b5b2.png) | ![hive-greeter-step-3](https://user-images.githubusercontent.com/24829816/87225790-67b01c80-c3a0-11ea-97c6-7c4f6e089fd8.png) |
+| :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
+|                           [Add Discord Bot to your Server](#step-1-add-discord-bot-to-your-server)                           |                                        [Code your Bot](#step-2-code-your-discord-bot)                                        |                                  [Deploying Bot on Heroku](#step-3-deploying-bot-on-heroku)                                  |
 
-***
+---
 
 ### STEP 1: Add Discord Bot to your Server
+
 <details>
 <summary>Reveal Steps</summary>
 <br>
@@ -27,53 +28,63 @@
 
 </details>
 
-***
+---
 
 ### STEP 2: Code your Discord Bot
+
 <details>
 <summary>Reveal Steps</summary>
 <br>
 
-1. Get your Bot's token, for this you must go back to the developer [portal](https://discord.com/developers/applications/), select your bot and go to the `Bot` tab, there you can find your Bot's `token`.
+1. You have to download [docker](https://docs.docker.com/get-docker) and install the [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension in your vscode
+
+2. Get your Bot's token, for this you must go back to the developer [portal](https://discord.com/developers/applications/), select your bot and go to the `Bot` tab, there you can find your Bot's `token`.
    ![image](https://user-images.githubusercontent.com/24829816/87231323-49114c00-c3c7-11ea-98b3-f81bd1b961b1.png)
 
-2. The simplest way to code your bot would be to fork this repo and then work on `bot-template` branch.
+3. The simplest way to code your bot would be to fork this repo and then work on `bot-template` branch.
    alternatively you can clone this repository specifically the `bot-template` branch.
 
    ```
-   $ git clone -b bot-template --single-branch https://github.com/MidasXIV/hive-greeter.git
+   $ git clone -b bot-template --single-branch https://github.com/NathanAlcantara/bot-teste
    ```
 
-3. Next create an `.env` file in the root of the repository and add your `token` like so:
+4. Next create an `.env` file in the root of the repository and add your `token` like so:
+
    ```
    token=TOKEN_WHICH_YOU_GOT_FROM_DISCORD
    ```
+
    the `.env` file takes in key and value pair so here the key is token, if you wish to give a different token name then make sure you update the same in `src/sonfig/secrets.ts` file, as it looks for the "token" key.
+
    ```
    export const DISCORD_TOKEN = process.env["token"];
    ```
 
-4. Now it's time to install and build the project
-   ```
-   $ npm install
-   $ npm run start
-   ```
-   you can view the `NPM SCRIPTS` in the `package.json` file, running the start command should build project and run the bot on http://localhost:5000/; you can modify the port in `src/index.ts` file.
+5. Now it's time to start the project
 
-5. On Successfully building and running the porject you'll see
+   Click on the Remote - Containers symbol (left inferior side `><`), select `Open in Container` and see the magic happen
+   When your workspace is ready you can start the bot: 
+
    ```
-   Server started on port 5000
-   Hive Greeter has started
+   $ yarn start
    ```
+
+   you can view the `NPM SCRIPTS` in the `package.json` file, running the start command should compile your project and run the bot
+
+6. On Successfully building and running the project you'll see
+
+   ```
+   🚀 Bot is on
+   ```
+
    You should now be able to see your Bot online in your discord Server.
 
-6. To get you started the template consits of two commands `greet` and `time` to test your bot, go to any text channel of your server and type in `> greet`, you'll see your bot reply as such
+7. To get you started the template consist of two commands `greet` and `time` to test your bot, go to any text channel of your server and type in `;greet`, you'll see your bot reply as such
    ![image](https://user-images.githubusercontent.com/24829816/87232040-018dbe80-c3cd-11ea-9a9e-1c7f05d60a08.png)
 
-7. To Add more commands you must add a new class in `src/commands` folder taking into reference `greetCommand.ts` file, then you should export the class using the `src/commands/index.ts` file so you can easily import it from your `src/CommandHandler.ts`.
+8. To Add more commands you must add a new class in `src/commands` folder taking into reference `greetCommand.ts` file, then you should export the class using the `src/commands/index.ts` file so you can easily import it from your `src/CommandHandler.ts`.
 
-8. You can update the "prefix" ( `>` ) of the bot from the `src/config/botConfig.ts` file. 
-
+9. You can update the "prefix" ( `;` ) of the bot from the `src/config/botConfig.ts` file.
 
 </details>
   
@@ -98,44 +109,52 @@
    $ git remote add heroku https://git.heroku.com/your-app-name.git
    ```
 
-**Integrating Heroku with GitHub**, *This step is required if you plan on automatically deploying your bot every time you push changes to a GitHub repository*. ([detailed steps here](https://devcenter.heroku.com/articles/github-integration))
+**Integrating Heroku with GitHub**, _This step is required if you plan on automatically deploying your bot every time you push changes to a GitHub repository_. ([detailed steps here](https://devcenter.heroku.com/articles/github-integration))
 
 5. Select your app from the [Heroku Dashboard](https://dashboard.heroku.com/apps).
-6. Go to `Deploy` tab of app, 
-   * **Enabling GitHub integration**: To configure GitHub integration, you have to authenticate with GitHub. You only have to do this once per Heroku account.
-   * **App Connected to Github**: you have to select the repository with your Bot.
-   * **Automatic deploys**: When you enable automatic deploys for a GitHub branch, Heroku builds and deploys all pushes to that branch.
-   ![image](https://user-images.githubusercontent.com/24829816/87197633-83b5ae80-c30b-11ea-95c3-1ae107f8a26c.png)
+6. Go to `Deploy` tab of app,
+   - **Enabling GitHub integration**: To configure GitHub integration, you have to authenticate with GitHub. You only have to do this once per Heroku account.
+   - **App Connected to Github**: you have to select the repository with your Bot.
+   - **Automatic deploys**: When you enable automatic deploys for a GitHub branch, Heroku builds and deploys all pushes to that branch.
+     ![image](https://user-images.githubusercontent.com/24829816/87197633-83b5ae80-c30b-11ea-95c3-1ae107f8a26c.png)
 
 **Testing your setup**, This step is not required, but it's highly recommended. You should build your application locally to test if you've set up it correctly.
+
 ```
 $ heroku local
 ```
+
 The Heroku CLI will now run your app at http://localhost:5000/; if no errors are encountered, you're on the right track!
 
 7. Go to `Settings` tab of app to set your discord bot token in `config vars` section.
    ![image](https://user-images.githubusercontent.com/24829816/87199962-a09eb180-c30c-11ea-9056-42f70d64b0d3.png)
 
 8. **Deploying your bot** Upon reaching this step you should have:
-   * developed a functioning Discord bot
-   * setup your repository for Heroku deployment
-   
+
+   - developed a functioning Discord bot
+   - setup your repository for Heroku deployment
+
    If all goes well, you can now deploy your app to Heroku by running:
+
    ```
    $ git push heroku master
    ```
+
    **Note**: If you have setup Automatic Deploys, you'll able to deploy your app with every commit to your master branch.
 
-***
+---
 
 On completion of the above steps Heroku Cli will give you a link to your hosted app something like this:
 `https://you-app.herokuapp.com`. Most often than not you'll run into issues with your first deployment as might have some dependencies in dev-dependencies or some config issues.
 
 if you run into any issues run
+
 ```
 heroku logs --tail
 ```
-***
+
+---
 
 > find detailed steps [here](https://elements.heroku.com/buildpacks/synicalsyntax/discord.js-heroku)
+
 </details>
