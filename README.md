@@ -45,7 +45,7 @@
    alternatively you can clone this repository specifically the `bot-template` branch.
 
    ```
-   $ git clone -b bot-template --single-branch https://github.com/NathanAlcantara/bot-teste
+   $ git clone -b bot-template --single-branch https://github.com/NathanAlcantara/bot-template
    ```
 
 4. Next create an `.env` file in the root of the repository and add your `token` like so:
@@ -63,6 +63,7 @@
 5. Now it's time to start the project
 
    Click on the Remote - Containers symbol (left inferior side `><`), select `Open in Container` and see the magic happen
+
    When your workspace is ready you can start the bot: 
 
    ```
