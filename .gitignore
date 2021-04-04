@@ -7,5 +7,9 @@ node_modules
 # Ignore built ts files
 dist
 
-# Ignore lock file
+# Ignore lock and error file
 *.lock
+*error.log
+
+# Ignore eslint cache
+.eslintcache
