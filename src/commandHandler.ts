@@ -21,8 +21,6 @@ export default class CommandHandler {
       return
     }
 
-    const sendToChannel = message.channel.send
-
     const commandParser = new CommandParser(message, this.prefix)
 
     const matchedCommand = this.commands.find((command) =>
@@ -30,7 +28,7 @@ export default class CommandHandler {
     )
 
     if (!matchedCommand) {
-      await sendToChannel(
+      await message.channel.send(
         `I don't recognize that command. Try ${this.prefix}help.`
       )
     } else if (commandParser.parsedCommandName === 'help') {
@@ -43,10 +41,10 @@ export default class CommandHandler {
       await matchedCommand.run(message, commandsNames)
     } else if (commandParser.args.includes('help')) {
       const helpMessage = matchedCommand.help(this.prefix)
-      sendToChannel(helpMessage)
+      await message.channel.send(helpMessage)
     } else {
       await matchedCommand.run(message).catch((error) => {
-        sendToChannel(
+        message.channel.send(
           `'${this.echoMessage(message)}' failed because of ${error}`
         )
       })
