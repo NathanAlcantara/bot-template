@@ -4,14 +4,12 @@
   "description": "Discord bot written in Typescript and discord.js hosted on Heroku",
   "main": "./src/index.ts",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only --inspect -- ./src/index.ts",
+    "start:dev": "ts-node-dev --respawn --transpile-only --inspect -- ./src/index.ts",
     "lint": "eslint --ext .ts,.json src",
     "lint:fix": "eslint --ext .ts,.json src --fix",
     "build": "rimraf ./dist && tsc",
-    "prestart:prod": "npm run build",
-    "start:prod": "node ./dist/index.js",
-    "preserver": "npm run build",
-    "server": "node ./dist/server.js"
+    "prestart": "npm run build",
+    "start": "node ./dist/index.js"
   },
   "repository": {
     "type": "git",
