@@ -1,5 +1,6 @@
 import { Message } from 'discord.js'
 import { GreetCommand, HelpCommand, TimeCommand } from './commands'
+import { ChessCommand } from './commands/chessCommand'
 import Command from './models/commandInterface'
 import { CommandParser } from './models/commandParser'
 
@@ -9,7 +10,12 @@ export default class CommandHandler {
   private readonly prefix: string
 
   constructor(prefix: string) {
-    const commandClasses = [HelpCommand, GreetCommand, TimeCommand]
+    const commandClasses = [
+      HelpCommand,
+      GreetCommand,
+      TimeCommand,
+      ChessCommand,
+    ]
 
     this.commands = commandClasses.map((commandClass) => new commandClass())
     this.prefix = prefix
@@ -43,10 +49,8 @@ export default class CommandHandler {
       const helpMessage = matchedCommand.help(this.prefix)
       await message.channel.send(helpMessage)
     } else {
-      await matchedCommand.run(message).catch((error) => {
-        message.channel.send(
-          `'${this.echoMessage(message)}' failed because of ${error}`
-        )
+      await matchedCommand.run(message, commandParser.args).catch((error) => {
+        message.channel.send(`${error}`)
       })
     }
   }

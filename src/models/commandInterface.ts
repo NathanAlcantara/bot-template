@@ -7,6 +7,11 @@ export default interface Command {
    */
   readonly commandNames: string | string[]
 
+  /**
+   * List of sub aliases for the command.
+   */
+  readonly subCommandNames: string[]
+
   /** Usage documentation. */
   help(commandPrefix: string): string
 
